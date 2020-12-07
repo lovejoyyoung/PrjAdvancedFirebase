@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textViewTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/person_information"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:id="@+id/textViewId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="30dp"
+        android:textSize="30sp"
+        android:text="@string/person_id" />
+
+    <EditText
+        android:id="@+id/editTextId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="6"
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toTopOf="@id/textViewId"
+        app:layout_constraintBottom_toBottomOf="@id/textViewId"
+        app:layout_constraintLeft_toRightOf="@id/textViewId"
+        android:layout_marginStart="30dp"
+        android:background="#4E94DA"
+        android:autofillHints="" />
+
+    <ImageView
+        android:id="@+id/imageViewPhoto"
+        android:layout_width="135dp"
+        android:layout_height="175dp"
+        android:layout_marginTop="30dp"
+        android:contentDescription="@string/todo"
+        android:scaleType="fitXY"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextId"
+        app:srcCompat="@drawable/noimage" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginBottom="40dp"
+        android:textAllCaps="false"
+        />
+
+    <Button
+        android:id="@+id/btnBrowse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/browse"
+        app:layout_constraintTop_toTopOf="@id/btnAdd"
+        app:layout_constraintBottom_toBottomOf="@id/btnAdd"
+        app:layout_constraintLeft_toRightOf="@id/btnAdd"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btnUpload"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/upload"
+        app:layout_constraintTop_toTopOf="@id/btnAdd"
+        app:layout_constraintBottom_toBottomOf="@id/btnAdd"
+        app:layout_constraintLeft_toRightOf="@id/btnBrowse"
+        android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btnFind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/find"
+        app:layout_constraintTop_toTopOf="@id/btnAdd"
+        app:layout_constraintBottom_toBottomOf="@id/btnAdd"
+        app:layout_constraintLeft_toRightOf="@id/btnUpload"
+        android:textAllCaps="false"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

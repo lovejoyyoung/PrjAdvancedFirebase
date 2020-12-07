@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">PrjAdvFirebase7260_Oct29</string>
+    <string name="find">Find</string>
+    <string name="upload">Upload</string>
+    <string name="browse">Browse</string>
+    <string name="add">Add</string>
+    <string name="person_id">Person Id</string>
+    <string name="person_information">Person Information</string>
+    <string name="todo">TODO</string>
+</resources>
