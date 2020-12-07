@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity implements
 
         editTextId = findViewById(R.id.editTextId);
         imageViewPhoto = findViewById(R.id.imageViewPhoto);
+
         btnAdd = findViewById(R.id.btnAdd);
         btnUpload = findViewById(R.id.btnUpload);
         btnBrowse = findViewById(R.id.btnBrowse);
@@ -135,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements
     private void browse() {
 
         Intent intent = new Intent();
-        intent.setType("image/*");
+        intent.setType("images/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(Intent.createChooser(intent,"Select photo"),IMAGE_REQUEST);
     }
@@ -143,59 +144,83 @@ public class MainActivity extends AppCompatActivity implements
 
     private void addPerson() {
 
-        ArrayList<String> hobbies = new ArrayList<String>();
-        hobbies.add("Soccer"); hobbies.add("Handball");
-        hobbies.add("Music"); hobbies.add("Read");
-        hobbies.add("Draw");
+        try{
+            ArrayList<String> hobbies = new ArrayList<String>();
+            hobbies.add("Soccer"); hobbies.add("Handball");
+            hobbies.add("Music"); hobbies.add("Read");
+            hobbies.add("Draw");
 
-        Car car = new Car("M400","Toyota","Corolla");
+            Car car = new Car("M400","Toyota","Corolla");
 
-        Person person = new Person(300,"Catherine","=====",car,hobbies);
+            Person person = new Person(400,"Catherine","=====",car,hobbies);
 
-        personDatabase.child(String.valueOf("300")).setValue(person);
+            personDatabase.child(String.valueOf("400")).setValue(person);
 
-        Log.d("FIREBASE","The person" + person.toString()+ "is added successfully !");
+            Log.d("FIREBASE","The person" + person.toString()+ "is added successfully !");
+
+        }catch (Exception e){
+            Log.d("FIREBASE",e.getMessage());
+        }
+
 
     }
 
     private void findPerson() {
 
         String id = editTextId.getText().toString();
-        DatabaseReference personChild =
-                FirebaseDatabase.getInstance().getReference()
-                        .child("person").child(id);
+        DatabaseReference personChild = FirebaseDatabase.getInstance().getReference("person").child(id);
         personChild.addValueEventListener(this);
     }
 
     @Override
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
         try{
+
             if (dataSnapshot.exists()) {
+
                 String name = dataSnapshot.child("name").getValue().toString();
+
                 Log.d("FIREBASE", "The name is " + name);
-                ArrayList<String> hobbies
-                        = (ArrayList) dataSnapshot.child("hobbies").getValue();
 
-                Log.d("FIREBASE", hobbies.toString());
 
+                //--Find Hobbies
+                ArrayList<String> hobbies = (ArrayList) dataSnapshot.child("hobbies").getValue();
+
+                //Log.d("FIREBASE", hobbies.toString());
+
+                int counter = 0;
+                for(String oneHobby:hobbies)
+                    Log.d("FIREBASE",counter++ +":"+oneHobby);
+
+                //Find Car
                 HashMap car = (HashMap) dataSnapshot.child("car").getValue();
 
                 Log.d("FIREBASE", car.toString());
-                Log.d("FIREBASE", car.get("brand").toString());
+                //Log.d("FIREBASE", car.get("brand").toString());
 
+
+
+                //-=================================================================
+
+                // !!!!! Load photos on firebase
                 // add the library :Picasso
                 // implementation 'com.squreup.picasso:picasso:2.5.2'
                 // find and display the photo
 
-                String urlPhoto = dataSnapshot.child("name").getValue().toString();
+                String urlPhoto = dataSnapshot.child("photo").getValue().toString();
+                Log.d("FIREBASE", urlPhoto);
 
                 //displyay the photo
-                Picasso
-                        .with(this)
-                        .load(urlPhoto)
-                        .placeholder(R.drawable.noimage)
-                        .into(imageViewPhoto);
-                Log.d("FIREBASE", "The photo is displayed successfully");}
+//                Picasso
+//                        .with(this)
+//                        .load(urlPhoto)
+//                        .placeholder(R.drawable.noimage)
+//                        .into(imageViewPhoto);
+//                Log.d("FIREBASE", "The photo is displayed successfully");
+                Picasso.with(this).load(urlPhoto).into(imageViewPhoto);
+                }
+
+
             }catch (Exception e) {
                 Log.d("FIREBASE",e.getMessage());
             }

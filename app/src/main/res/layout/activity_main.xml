@@ -41,8 +41,8 @@
 
     <ImageView
         android:id="@+id/imageViewPhoto"
-        android:layout_width="135dp"
-        android:layout_height="175dp"
+        android:layout_width="357dp"
+        android:layout_height="294dp"
         android:layout_marginTop="30dp"
         android:contentDescription="@string/todo"
         android:scaleType="fitXY"
